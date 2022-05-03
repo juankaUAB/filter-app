@@ -51,10 +51,22 @@ def alignImages(im1, im2):
 def get_filter(img, ref):
     return cv2.subtract(ref, img)
 
+#modificacion del juanka: usamos threshold adaptativo para que no afecte la iluminacion
 def binarize(img):
-    _,ret = cv2.threshold(img , 50, 255, cv2.THRESH_BINARY)
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    gray = cv2.medianBlur(img, 5)
+    dst2 = np.logical_not(cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2))
     
-    return ret
+    return dst2
+
+#funcion del juanka
+def get_objects(reference_img, align_img):
+    applied_mask = np.zeros((align_img.shape[0],align_img.shape[1],align_img.shape[2]),dtype=np.uint8)
+    applied_mask[:,:,0] =  align_img[:,:,0] * reference_img
+    applied_mask[:,:,1] =  align_img[:,:,1] * reference_img
+    applied_mask[:,:,2] =  align_img[:,:,2] * reference_img
+    #applied_mask[applied_mask == 0] = 255
+    return applied_mask
     
     
     

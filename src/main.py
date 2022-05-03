@@ -11,18 +11,17 @@ if __name__ == '__main__':
   #Calculate the homography and store it in h with the corrected img in corrected_img
   corrected_img, h = alignImages(align_img, reference_img)
 
+  # Write aligned image to disk.
+  cv2.imwrite("../imgs/aligned.jpg", corrected_img)
 
   b = binarize(corrected_img)
-
-  cv2.imshow('hola', b)
-  cv2.waitKey(0)
-  cv2.destroyAllWindows()
+  klk = get_objects(b, corrected_img)
     
-  cv2.imshow('hola', reference_img)
+  cv2.imshow('hola', corrected_img)
   cv2.waitKey(0)
   cv2.destroyAllWindows()
 
   # Write aligned image to disk.
-  cv2.imshow('hola', get_filter(b, reference_img))
+  cv2.imshow('hola', klk)
   cv2.waitKey(0)
   cv2.destroyAllWindows()
