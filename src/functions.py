@@ -46,3 +46,19 @@ def alignImages(im1, im2):
   align_img = cv2.warpPerspective(im1, h, (width, height))
 
   return align_img, h
+
+
+def get_filter(img, ref):
+    return cv2.subtract(ref, img)
+
+def binarize(img):
+    _,ret = cv2.threshold(img , 50, 255, cv2.THRESH_BINARY)
+    
+    return ret
+    
+    
+    
+    
+    
+    
+    
