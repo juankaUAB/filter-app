@@ -25,3 +25,7 @@ if __name__ == '__main__':
   cv2.imshow('hola', klk)
   cv2.waitKey(0)
   cv2.destroyAllWindows()
+  
+  cv2.imshow('carica', detect_face(take_picture()))
+  cv2.waitKey(0)
+  cv2.destroyAllWindows()

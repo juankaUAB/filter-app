@@ -67,6 +67,30 @@ def get_objects(reference_img, align_img):
     applied_mask[:,:,2] =  align_img[:,:,2] * reference_img
     #applied_mask[applied_mask == 0] = 255
     return applied_mask
+
+def detect_face(img):
+    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    
+    faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+    
+    for (x, y, w, h) in faces:
+        cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
+        
+    return img
+
+def take_picture():
+    cam = cv2.VideoCapture(0)
+    while (cam.isOpened()):
+        ret, frame = cam.read()
+        cv2.imshow('Fer foto amb la tecla f',frame)
+        if (cv2.waitKey(1) == ord('f')):
+            break
+    
+    cam.release()
+    cv2.destroyAllWindows()
+    
+    return frame
     
     
     
