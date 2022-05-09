@@ -22,6 +22,7 @@ def get_filter(img, plantilla):
     
     return f
 
+'''
 plantilla = cv2.imread("../imgs/plantilla.jpg", cv2.IMREAD_COLOR)
 
 dibuix = cv2.imread("../imgs/foto_gt.jpg", cv2.IMREAD_COLOR)
@@ -34,8 +35,10 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 f = get_filter(corrected_img, plantilla)
+cv2.imwrite('objetos_filtro.jpg', f)
 
 cv2.imshow('hola', f)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+'''
  
