@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-MAX_FEATURES = 200
+MAX_FEATURES = 750
 GOOD_MATCH_PERCENT = 0.15
 
 def alignImages(im1, im2):
@@ -74,10 +74,12 @@ def detect_face(img):
     
     faces = face_cascade.detectMultiScale(gray, 1.1, 4)
     
-    for (x, y, w, h) in faces:
+    return faces
+    
+    '''for (x, y, w, h) in faces:
         cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
         
-    return img
+    return img'''
 
 def take_picture():
     cam = cv2.VideoCapture(0)
@@ -92,7 +94,21 @@ def take_picture():
     
     return frame
     
+def apply_filter(img, filtre, faces):
+    for (x, y, w, h) in faces:
+        h = h + 20
+        nou_filtre = cv2.resize(filtre, (w, h))
+        img[x:x+h, y:y+w, :] = filter2face(img[x:x+h, y:y+w, :], nou_filtre)
     
+    return img
+    
+def filter2face(img, filtre):
+    for row in range(img.shape[0]):
+        for col in range(img.shape[1]):
+            if np.all(filtre[row,col,:] > [20, 20, 20]):
+                img[row, col, :] = filtre[row, col, :]
+                
+    return img
     
     
     
