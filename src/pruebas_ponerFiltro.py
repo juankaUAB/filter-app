@@ -148,8 +148,8 @@ def correct_colours(im1, im2, landmarks1):
 
 
 #aqui se añaden las imagenes que queremos usar
-im1, landmarks1 = read_im_and_landmarks("aqui foto de la persona") 
-im2, landmarks2 = read_im_and_landmarks("aqui foto de la plantilla con el filtro dibujado") #faltaria aqui alinear el filtro
+im1, landmarks1 = read_im_and_landmarks("../imgs/fotojuanka.jpg") 
+im2, landmarks2 = read_im_and_landmarks("../imgs/foto_gt.jpg") #faltaria aqui alinear el filtro
 plantilla = cv2.imread("../imgs/plantilla.jpg", cv2.IMREAD_COLOR)
 
 M = transformation_from_points(landmarks1[ALIGN_POINTS],
@@ -159,7 +159,7 @@ im2_copy = copy.deepcopy(im2)
 im2_copy = get_filter(im2_copy, plantilla)
 mask = get_face_mask(im2_copy, landmarks2)
 warped_mask = warp_im(mask, M, im1.shape)
-combined_mask = get_face_mask(im1, landmarks1)
+#combined_mask = get_face_mask(im1, landmarks1)
 
 warped_im2 = warp_im(im2_copy, M, im1.shape)
 #warped_corrected_im2 = correct_colours(im1, warped_im2, landmarks1)
