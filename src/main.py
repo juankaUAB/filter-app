@@ -1,4 +1,5 @@
 from functions import *
+from filtre import *
 
 if __name__ == '__main__':
     
